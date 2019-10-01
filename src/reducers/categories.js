@@ -1,15 +1,16 @@
 import {ActionTypes} from '../actions';
-let nextCategoryId = 0;
 
 const categories = (state=[], action) => {
     switch(action.type) {
-        case ActionTypes.ADD_CATEGORY:
+        case ActionTypes.ADD_CATEGORY_COMPLETE:
             return [
                 ...state,
-                {name: action.payload.categoryName, id: nextCategoryId++}
+                action.payload.category
             ]
         case ActionTypes.DELETE_CATEGORY:
             return state.filter(category => category.id !== action.payload.categoryId)
+        case ActionTypes.LOAD_CATEGORIES_COMPLETE:
+            return action.payload.categories;
         default:
             return state;
     }

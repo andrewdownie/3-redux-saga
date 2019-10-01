@@ -5,8 +5,29 @@ export const ActionTypes = {
     TOGGLE_TODO: 'TOGGLE_TODO',
     ADD_CATEGORY: 'ADD_CATEGORY',
     DELETE_CATEGORY: 'DELETE_CATEGORY',
-    SELECT_CATEGORY: 'SELECT_CATEGORY'
+    SELECT_CATEGORY: 'SELECT_CATEGORY',
+    ADD_TODO_COMPLETE: 'ADD_TODO_COMPLETED',
+    DELETE_TODO_COMPLETE: 'DELETE_TODO_COMPLETE',
+    TOGGLE_TODO_COMPLETE: 'TOGGLE_TODO_COMPLETE',
+    ADD_CATEGORY_COMPLETE: 'ADD_CATEGORY_COMPLETE',
+    DELETE_CATEGORY_COMPLETE: 'DELETE_CATEGORY_COMPLETE',
+    LOAD_CATEGORIES_COMPLETE: 'LOAD_CATEGORIES_COMPLETE',
+    LOAD_TODOS_COMPLETE: 'LOAD_TODOS_COMPLETE'
 }
+
+export const loadCategoriesComplete = (categories) => ({
+    type: ActionTypes.LOAD_CATEGORIES_COMPLETE,
+    payload: {
+        categories
+    }
+});
+
+export const addCategoryComplete = (category) => ({
+    type: ActionTypes.ADD_CATEGORY_COMPLETE,
+    payload: {
+        category
+    }
+})
 
 export const toggleCategoryDrawer = () => ({
     type: ActionTypes.TOGGLE_CATEGORY_DRAWER
