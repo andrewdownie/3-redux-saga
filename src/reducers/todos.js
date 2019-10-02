@@ -1,21 +1,22 @@
 import {ActionTypes} from '../actions';
-let nextTodoId = 0;
 
 const todos = (state=[], action) => {
     switch(action.type){
-        case ActionTypes.ADD_TODO:
+        case ActionTypes.LOAD_TODOS_COMPLETE:
+            return action.payload.todos;
+        case ActionTypes.ADD_TODO_COMPLETE:
             return [
                 ...state,
                 {
                     name: action.payload.todoName,
                     categoryId: action.payload.categoryId,
-                    id: nextTodoId++,
-                    completed: false
+                    id: action.payload.todoId,
+                    completed: action.payload.completed 
                 }
             ];
-        case ActionTypes.DELETE_TODO:
+        case ActionTypes.DELETE_TODO_COMPLETE:
             return state.filter(todo => todo.id !== action.payload.todoId);
-        case ActionTypes.TOGGLE_TODO:
+        case ActionTypes.TOGGLE_TODO_COMPLETE:
             return state.map(todo => {
                 return (
                     todo.id === action.payload.todoId ? 

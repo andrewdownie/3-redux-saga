@@ -15,6 +15,30 @@ export const ActionTypes = {
     LOAD_TODOS_COMPLETE: 'LOAD_TODOS_COMPLETE'
 }
 
+export const loadTodosComplete = (todos) => ({
+    type: ActionTypes.LOAD_TODOS_COMPLETE,
+    payload: {
+        todos
+    }
+})
+
+export const toggleTodoComplete = (todoId) => ({
+    type: ActionTypes.TOGGLE_TODO_COMPLETE,
+    payload: {
+        todoId
+    }
+})
+
+export const addTodoComplete = (todo) => ({
+    type: ActionTypes.ADD_TODO_COMPLETE,
+    payload: {
+        todoId: todo.id,
+        completed: todo.completed,
+        categoryId: todo.categoryId,
+        todoName: todo.name
+    }
+})
+
 export const loadCategoriesComplete = (categories) => ({
     type: ActionTypes.LOAD_CATEGORIES_COMPLETE,
     payload: {
@@ -26,6 +50,13 @@ export const addCategoryComplete = (category) => ({
     type: ActionTypes.ADD_CATEGORY_COMPLETE,
     payload: {
         category
+    }
+})
+
+export const deleteCategoryComplete = (categoryId) => ({
+    type: ActionTypes.DELETE_CATEGORY_COMPLETE,
+    payload: {
+        categoryId
     }
 })
 

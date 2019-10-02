@@ -56,6 +56,11 @@ function RenderTodos(props, completed, title) {
 }
 
 function FilterTodos(todos, categoryId, completed) {
+    if(todos.length === 0){
+        return [];
+    }
+
+    console.log(todos.length);
     return todos.filter(todo => {
         return (
             todo.categoryId === categoryId

@@ -1,11 +1,12 @@
 import {put, all, takeEvery} from 'redux-saga/effects';
-import {ActionTypes, addCategoryComplete, loadCategoriesComplete} from '../actions';
+import {ActionTypes, deleteCategoryComplete, addCategoryComplete, loadCategoriesComplete, selectCategory} from '../actions';
 
 
 export default function*() {
     yield all([
         allCategories(),
-        addCategory()
+        addCategory(),
+        deleteCategory()
     ]);
 }
 
@@ -20,8 +21,10 @@ function* allCategories() {
         json = [];
     }
 
-    yield put(loadCategoriesComplete(json));
+    const firstCategoryId = json.length > 0 ? json[0].id : 0;
 
+    yield put(loadCategoriesComplete(json));
+    yield put(selectCategory(firstCategoryId));
 }
 
 function* addCategory() {
@@ -32,11 +35,28 @@ function* addCategory() {
             id: Math.random()
         }
 
-        // Update the local storage, instead of making an async request
+        // For the purpose of not further complicating this tutorial, update the local storage, instead of making an async request
         const categories = JSON.parse(localStorage.getItem('categories'));
         categories.push(newCategory);
         localStorage.setItem('categories', JSON.stringify(categories));
 
         yield put(addCategoryComplete(newCategory));
     });
+}
+
+function* deleteCategory() {
+    yield(takeEvery(ActionTypes.DELETE_CATEGORY, function*(action){
+        const targetId = action.payload.categoryId;
+
+        // For the purpose of not further complicating this tutorial, delete from local storage, instead of making an async request
+        const categories = JSON.parse(localStorage.getItem('categories'));
+        const filteredCategories = categories.filter(category => 
+            category.id !== targetId
+        );
+        localStorage.setItem('categories', JSON.stringify(filteredCategories));
+
+
+        yield put(deleteCategoryComplete(targetId));
+
+    }));
 }

@@ -7,7 +7,7 @@ const categories = (state=[], action) => {
                 ...state,
                 action.payload.category
             ]
-        case ActionTypes.DELETE_CATEGORY:
+        case ActionTypes.DELETE_CATEGORY_COMPLETE:
             return state.filter(category => category.id !== action.payload.categoryId)
         case ActionTypes.LOAD_CATEGORIES_COMPLETE:
             return action.payload.categories;
